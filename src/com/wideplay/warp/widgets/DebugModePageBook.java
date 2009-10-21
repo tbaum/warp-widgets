@@ -3,7 +3,7 @@ package com.wideplay.warp.widgets;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.google.inject.Singleton;
-import com.wideplay.warp.servlet.RequestScoped;
+import com.google.inject.servlet.RequestScoped;
 import com.wideplay.warp.widgets.compiler.Compilers;
 import com.wideplay.warp.widgets.compiler.Parsing;
 import com.wideplay.warp.widgets.routing.PageBook;
@@ -20,8 +20,7 @@ import java.util.Set;
  *
  * @author Dhanji R. Prasanna (dhanji@gmail com)
  */
-@ThreadSafe @Singleton
-class DebugModePageBook implements PageBook {
+@ThreadSafe @Singleton class DebugModePageBook implements PageBook {
     private final PageBook book;
     private final Provider<TemplateLoader> templateLoader;
     private final SystemMetrics metrics;
@@ -48,7 +47,7 @@ class DebugModePageBook implements PageBook {
 
         //reload template
         reload(uri, page);
-        
+
         return page;
     }
 

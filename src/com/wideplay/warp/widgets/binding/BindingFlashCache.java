@@ -1,6 +1,6 @@
 package com.wideplay.warp.widgets.binding;
 
-import com.wideplay.warp.servlet.SessionScoped;
+import com.google.inject.servlet.SessionScoped;
 import net.jcip.annotations.NotThreadSafe;
 
 import java.util.HashMap;
@@ -8,11 +8,9 @@ import java.util.Map;
 
 /**
  * @author Dhanji R. Prasanna (dhanji@gmail.com)
- *
- * Used to store binding (or forwarding) information between successive requests.
+ *         Used to store binding (or forwarding) information between successive requests.
  */
-@SessionScoped @NotThreadSafe
-class BindingFlashCache implements FlashCache {
+@SessionScoped @NotThreadSafe class BindingFlashCache implements FlashCache {
     private final Map<String, Object> cache = new HashMap<String, Object>();
 
     @SuppressWarnings("unchecked")

@@ -1,6 +1,6 @@
 package com.wideplay.warp.widgets.rendering.control;
 
-import com.google.inject.util.ToStringBuilder;
+import com.google.inject.internal.ToStringBuilder;
 import com.wideplay.warp.widgets.Evaluator;
 import com.wideplay.warp.widgets.Renderable;
 import com.wideplay.warp.widgets.rendering.SelfRendering;
@@ -14,7 +14,7 @@ import java.util.Set;
 
 /**
  * @author Dhanji R. Prasanna (dhanji@gmail com)
-*/
+ */
 class WidgetWrapper {
     private final Class<? extends Renderable> clazz;
     private final Constructor<? extends Renderable> constructor;
@@ -36,11 +36,9 @@ class WidgetWrapper {
         try {
 
 
-        return WidgetKind.NORMAL.equals(kind) ?
-                constructor
-                    .newInstance(widgetChain, expression, evaluator) :
-                constructor
-                    .newInstance(toArguments(widgetChain), expression, evaluator, pageBook, key);
+            return WidgetKind.NORMAL.equals(kind) ?
+                    constructor.newInstance(widgetChain, expression, evaluator) :
+                    constructor.newInstance(toArguments(widgetChain), expression, evaluator, pageBook, key);
 
         } catch (IllegalAccessException e) {
             throw new IllegalStateException("Malformed Widget (this should never happen): " + clazz);
@@ -95,6 +93,9 @@ class WidgetWrapper {
         return selfRendering;
     }
 
+    /**
+     * TODO: cut dependency to com.google.inject.internal.ToStringBuilder.
+     */
     @Override
     public String toString() {
         return new ToStringBuilder(WidgetWrapper.class)
@@ -105,5 +106,7 @@ class WidgetWrapper {
     }
 
     @SuppressWarnings({"InnerClassTooDeeplyNested"})
-    private static enum WidgetKind { NORMAL, EMBED }
+    private static enum WidgetKind {
+        NORMAL, EMBED
+    }
 }
